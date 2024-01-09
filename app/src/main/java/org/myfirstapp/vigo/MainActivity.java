@@ -1,37 +1,80 @@
 package org.myfirstapp.vigo;
 
-import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.cardview.widget.CardView;
 
-import org.myfirstapp.vigo.databinding.ActivityMainBinding;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private TextView digitalClock;
+    private CardView cardView;
+    private ToggleButton toggleButton;
+    private RelativeLayout container;
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        digitalClock = findViewById(R.id.digitalClock);
+        cardView = findViewById(R.id.cardView);
+        toggleButton = findViewById(R.id.toggleButton);
+        container = findViewById(R.id.container);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        // Set initial background image based on the initial state of the toggle
+        updateBackground(toggleButton.isChecked());
+
+        // Update the time and background image when the toggle state changes
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateBackground(isChecked);
+            }
+        });
+
+        // Update the time every second
+        updateClock();
     }
 
+    private void updateBackground(boolean isDayMode) {
+        if (isDayMode) {
+            container.setBackgroundResource(R.drawable.daytime); // Set the day mode background
+        } else {
+            container.setBackgroundResource(R.drawable.nightime); // Set the night mode background
+        }
+    }
+
+    private void updateClock() {
+        // Get the current time
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        String currentTime = sdf.format(calendar.getTime());
+
+        // Update the TextView with the current time
+        digitalClock.setText(currentTime);
+
+        // Schedule the next update after 1 second
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateClock();
+            }
+        }, 1000);
+    }
 }
+

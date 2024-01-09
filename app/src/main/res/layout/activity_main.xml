@@ -5,25 +5,31 @@
     android:layout_height="match_parent"
     android:background="@drawable/nightime">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:elevation="4dp">
+        android:foreground="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="4dp"
+        android:padding="20sp"
+        android:background="@drawable/gradient_background">
 
         <TextView
             android:id="@+id/digitalClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40sp"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
+            android:fontFamily="cursive"
             android:padding="16dp"
-            android:text="@string/time"/>
+            android:textStyle="bold"
+            android:text="@string/time" />
 
-    </androidx.cardview.widget.CardView>
-
+    </FrameLayout>
 
     <ToggleButton
         android:id="@+id/toggleButton"
@@ -32,10 +38,9 @@
         android:textOn="Night Mode"
         android:textOff="Day Mode"
         android:layout_centerInParent="true"
-        android:layout_below="@id/cardView"
+        android:layout_below="@id/frameLayout"
         android:layout_marginTop="20sp"
         android:padding="20sp">
     </ToggleButton>
-
 
 </RelativeLayout>

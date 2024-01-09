@@ -4,15 +4,13 @@ package org.myfirstapp.vigo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
+
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,7 +19,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView digitalClock;
-    private CardView cardView;
+    private FrameLayout frameLayout;  // Declare FrameLayout
     private ToggleButton toggleButton;
     private RelativeLayout container;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         digitalClock = findViewById(R.id.digitalClock);
-        cardView = findViewById(R.id.cardView);
+        frameLayout = findViewById(R.id.frameLayout);  // Initialize FrameLayout
         toggleButton = findViewById(R.id.toggleButton);
         container = findViewById(R.id.container);
 
@@ -77,4 +75,3 @@ public class MainActivity extends AppCompatActivity {
         }, 1000);
     }
 }
-

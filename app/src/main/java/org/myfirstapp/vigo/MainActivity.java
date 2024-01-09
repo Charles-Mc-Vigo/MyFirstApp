@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         updateClock();
 
-        // Set the click listener for the About App button
         btnAboutApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateBackground(boolean isDayMode) {
+        // Remove the delay
         if (isDayMode) {
             container.setBackgroundResource(R.drawable.daytime);
         } else {
             container.setBackgroundResource(R.drawable.nightime);
         }
     }
+
 
     private void updateClock() {
         // Get the current time

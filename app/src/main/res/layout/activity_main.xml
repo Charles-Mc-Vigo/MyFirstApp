@@ -40,10 +40,13 @@
         android:layout_centerInParent="true"
         android:layout_below="@id/frameLayout"
         android:layout_marginTop="20sp"
-        android:padding="20sp">
-    </ToggleButton>
+        android:padding="20sp"
+        android:button="@drawable/toggle_button_selector"
+        android:textSize="16sp"
+        android:textColor="#000000" />
 
-    <!-- Inside your RelativeLayout in activity_main.xml -->
+
+
     <Button
         android:id="@+id/btnAboutApp"
         android:layout_width="48dp"
@@ -57,6 +60,5 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"/>
-
 
 </RelativeLayout>

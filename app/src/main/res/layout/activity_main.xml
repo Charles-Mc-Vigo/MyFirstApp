@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textSize="40sp"
             android:textColor="#FFFFFF"
-            android:fontFamily="cursive"
+            android:fontFamily="@font/digital"
             android:padding="16dp"
             android:textStyle="bold"
             android:text="@string/time" />

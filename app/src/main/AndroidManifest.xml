@@ -24,7 +24,13 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".AboutAppActivity"
+            android:exported="false"
+            android:label="About App">
         </activity>
 
     </application>

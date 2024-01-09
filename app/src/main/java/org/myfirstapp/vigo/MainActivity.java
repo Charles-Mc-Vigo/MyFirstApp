@@ -1,17 +1,17 @@
 package org.myfirstapp.vigo;
 
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.RelativeLayout;
 import android.widget.FrameLayout;
-
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -19,7 +19,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView digitalClock;
-    private FrameLayout frameLayout;  // Declare FrameLayout
+    private FrameLayout frameLayout;
     private ToggleButton toggleButton;
     private RelativeLayout container;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -30,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         digitalClock = findViewById(R.id.digitalClock);
-        frameLayout = findViewById(R.id.frameLayout);  // Initialize FrameLayout
+        frameLayout = findViewById(R.id.frameLayout);
         toggleButton = findViewById(R.id.toggleButton);
         container = findViewById(R.id.container);
+        Button btnAboutApp = findViewById(R.id.btnAboutApp);
 
-        // Set initial background image based on the initial state of the toggle
         updateBackground(toggleButton.isChecked());
 
-        // Update the time and background image when the toggle state changes
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -45,15 +44,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Update the time every second
         updateClock();
+
+        // Set the click listener for the About App button
+        btnAboutApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Intent to start AboutAppActivity
+                Intent intent = new Intent(MainActivity.this, AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateBackground(boolean isDayMode) {
         if (isDayMode) {
-            container.setBackgroundResource(R.drawable.daytime); // Set the day mode background
+            container.setBackgroundResource(R.drawable.daytime);
         } else {
-            container.setBackgroundResource(R.drawable.nightime); // Set the night mode background
+            container.setBackgroundResource(R.drawable.nightime);
         }
     }
 
@@ -63,10 +71,8 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String currentTime = sdf.format(calendar.getTime());
 
-        // Update the TextView with the current time
         digitalClock.setText(currentTime);
 
-        // Schedule the next update after 1 second
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

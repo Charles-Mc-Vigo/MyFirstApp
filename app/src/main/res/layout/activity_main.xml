@@ -43,4 +43,20 @@
         android:padding="20sp">
     </ToggleButton>
 
+    <!-- Inside your RelativeLayout in activity_main.xml -->
+    <Button
+        android:id="@+id/btnAboutApp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/circular_button"
+        android:text="!"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
+
+
 </RelativeLayout>
